@@ -7,12 +7,26 @@ const playwright = require('playwright');
   await page.waitForLoadState();
 
   await page.goto('https://mail.google.com');
-  const table = await page.locator('table[role="grid"]');
-  console.log({table})
-  // // Click on the first email
-  // await page.click('table[role="grid"] tbody tr:first-child');
-  // await page.screenshot({ path: 'first_email.png' });
+  const emails = await page.locator('table[role="grid"] tbody tr').all();
+  console.log({emails})
 
+  for (let email of emails) {
+    const pagePromise = defaultContext.waitForEvent('page');
+    await email.click({ modifiers: ['Meta'] })
+    const newPage = await pagePromise;
+    await page.waitForLoadState();
+    const h2_title = await newPage.locator('h2').first().allInnerTexts()
+    const sender = await newPage.locator('span[role=gridcell]').first()
+    const dd = await sender.allInnerTexts()
+    const title = await newPage.title()
+    const url = await newPage.url()
+    // await newPage.screenshot({ path: `${title.replaceAll(' ', '-')}.png`});
+    console.log({title, url, h2_title, dd});
+    await newPage.close()
+  }
+
+  await defaultContext.close();
+  await browser.close();
 })()
 
 // "/Users/godwinogbara/Projects/Kubernetes/kube-demo/chrome/mac_arm-121.0.6167.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing" --remote-debugging-port=9222
