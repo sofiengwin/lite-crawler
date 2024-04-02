@@ -17,11 +17,19 @@ const playwright = require('playwright');
     await page.waitForLoadState();
     const h2_title = await newPage.locator('h2').first().allInnerTexts()
     const sender = await newPage.locator('span[role=gridcell]').first()
+
+    const show = await newPage.locator("div[data-tooltip='Show details']").click()
+    const details = await page.locator('table tbody tr')
+    const showText = await details.allInnerTexts()
+
+    // await page.getByLabel('Show details').click();
+    // const from = await page.getByText('from:').allInnerTexts();
+    // const cell = await page.getByRole('cell', { name: 'to:' }).allInnerTexts();
     const dd = await sender.allInnerTexts()
     const title = await newPage.title()
     const url = await newPage.url()
-    // await newPage.screenshot({ path: `${title.replaceAll(' ', '-')}.png`});
-    console.log({title, url, h2_title, dd});
+    await newPage.screenshot({ path: `${title.replaceAll(' ', '-')}.png`});
+    console.log({title, url, h2_title, dd, showText});
     await newPage.close()
   }
 
@@ -30,3 +38,12 @@ const playwright = require('playwright');
 })()
 
 // "/Users/godwinogbara/Projects/Kubernetes/kube-demo/chrome/mac_arm-121.0.6167.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing" --remote-debugging-port=9222
+
+// await page.getByLabel('Show details').click();
+// await page.getByText('from:').click();
+// await page.getByRole('cell', { name: 'to:' }).click();
+// await page.getByText('date:').click();
+// await page.getByText('from:').click();
+// await page.getByRole('cell', { name: 'subject:' }).click();
+// await page.getByText('subject:').click();
+// await page.getByRole('cell', { name: 'mailed-by:' }).click();
