@@ -1,4 +1,5 @@
 const playwright = require('playwright');
+const {captureEmail, captureUsername}  = require('./helpers');
 
 (async () => {
   const browser = await playwright.chromium.connectOverCDP('ws://127.0.0.1:9222/devtools/browser/8fe2489e-4bdd-4029-b841-a57eeeff2c50');
@@ -39,38 +40,6 @@ const playwright = require('playwright');
   await defaultContext.close();
   await browser.close();
 })()
-
-function captureEmail(str) {
-  // Regular expression to match the email
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  
-  // Extracting the email using match and regex
-  const match = str.match(emailRegex);
-
-  // If match is found, return the captured email
-  console.log({match})
-  if (match && match.length > 1) {
-    return match[1].replace(/[<>]/g, '');
-  } else {
-    return null; // Return null if no match is found
-  }
-}
-
-function captureUsername(str) {
-  // Regular expression to match the username
-  const usernameRegex = /^([^\s]+)\s/;
-
-  // Extracting the username using match and regex
-  const match = str.match(usernameRegex);
-
-  // If match is found, return the captured username
-  if (match && match.length > 1) {
-    return match[1];
-  } else {
-    return null; // Return null if no match is found
-  }
-}
 
 // "/Users/godwinogbara/Projects/Kubernetes/kube-demo/chrome/mac_arm-121.0.6167.85/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing" --remote-debugging-port=9222
 
