@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
-    "test": "node ./helpers.test.js"
+    "test": "node ./helpers.test.js",
+    "upload": "./upload.sh"
   },
   "keywords": [],
   "author": "",

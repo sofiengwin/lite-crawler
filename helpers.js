@@ -7,7 +7,6 @@ function captureEmail(str) {
   const match = str.match(emailRegex);
 
   // If match is found, return the captured email
-  console.log({match, str})
   if (match && match.length >= 1) {
     console.log('fhjdsjsdjdsjkdsjdsjkdsj')
     return match[0];
@@ -22,10 +21,9 @@ function captureUsername(str) {
 
   // Extracting the username using match and regex
   const match = str.match(usernameRegex);
-
   // If match is found, return the captured username
-  if (match && match.length > 1) {
-    return match[1];
+  if (match && match.length >= 1) {
+    return match[0].trim();
   } else {
     return null; // Return null if no match is found
   }

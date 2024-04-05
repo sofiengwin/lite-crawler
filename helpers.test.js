@@ -10,10 +10,10 @@ describe('captureEmail', () => {
   it('should be ok', () => {
     assert.equal(captureEmail('Indeed <help@indeed.com>'), 'help@indeed.com');
   });
-
-  // describe('a nested thing', () => {
-  //   it('should work', () => {
-  //     // assert.strictEqual(3, 3);
-  //   });
-  // });
+  
+  describe('captureUsername', () => {
+    it('should work', () => {
+      assert.equal(captureUsername('Indeed <help@indeed.com>'), 'Indeed');
+    });
+  });
 });
