@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./index.js",
     "test": "node ./helpers.test.js",
-    "upload": "./upload.sh"
+    "upload": "./upload.sh",
+    "play": "node ./play.js"
   },
   "keywords": [],
   "author": "",

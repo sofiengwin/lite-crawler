@@ -15,21 +15,14 @@ const playwright = require('playwright');
   const pagePromise = defaultContext.waitForEvent('page');
   await item.click({ modifiers: ['Meta'] })
   const newPage = await pagePromise;
-  // await page.waitForLoadState();
   const title = await newPage.title()
   const url = await newPage.url()
   await page.screenshot({ path: `${title}.png`, fullPage: true });
   console.log({title, url});
-  // console.log(await newPage.url());
+
   await newPage.close()
  }
 
   await defaultContext.close();
   await browser.close();
 })()
-
-
-// npx playwright codegen https://www.sportingnews.com/
-// google-chrome --remote-debugging-port=9222
-// google-chrome --headless --remote-debugging-port=9222
-
